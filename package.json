@@ -1,0 +1,25 @@
+{
+  "name": "request_animation_frame",
+  "version": "0.0.1",
+  "description": "requestAnimationFrame for the browser and node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathanfaucett/request_animation_frame.git"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "request_animation_frame",
+    "request_animation_frame.js"
+  ],
+  "author": "Nathan Faucett",
+  "license": "BSD-2-Clause",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jsbeautifier": ""
+  },
+  "dependencies": {
+    "time": "nathanfaucett/time"
+  }
+}
