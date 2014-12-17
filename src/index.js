@@ -1,23 +1,24 @@
-var time = require("time");
+var environment = require("environment"),
+    time = require("time");
 
 
 var lastTime = 0,
+    window = environment.window,
     max = Math.max,
-    setTimeout = global.setTimeout,
 
     requestAnimationFrame, cancelAnimationFrame;
 
 
 requestAnimationFrame = (
-    global.requestAnimationFrame ||
-    global.webkitRequestAnimationFrame ||
-    global.mozRequestAnimationFrame ||
-    global.oRequestAnimationFrame ||
-    global.msRequestAnimationFrame ||
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
     function requestAnimationFrame(callback) {
         var current = time.now(),
             timeToCall = max(0, 16 - (current - lastTime)),
-            id = setTimeout(
+            id = global.setTimeout(
                 function runCallback() {
                     callback(current + timeToCall);
                 },
@@ -30,28 +31,31 @@ requestAnimationFrame = (
 );
 
 cancelAnimationFrame = (
-    global.cancelAnimationFrame ||
-    global.cancelRequestAnimationFrame ||
+    window.cancelAnimationFrame ||
+    window.cancelRequestAnimationFrame ||
 
-    global.webkitCancelAnimationFrame ||
-    global.webkitCancelRequestAnimationFrame ||
+    window.webkitCancelAnimationFrame ||
+    window.webkitCancelRequestAnimationFrame ||
 
-    global.mozCancelAnimationFrame ||
-    global.mozCancelRequestAnimationFrame ||
+    window.mozCancelAnimationFrame ||
+    window.mozCancelRequestAnimationFrame ||
 
-    global.oCancelAnimationFrame ||
-    global.oCancelRequestAnimationFrame ||
+    window.oCancelAnimationFrame ||
+    window.oCancelRequestAnimationFrame ||
 
-    global.msCancelAnimationFrame ||
-    global.msCancelRequestAnimationFrame ||
-
-    global.clearTimeout
+    window.msCancelAnimationFrame ||
+    window.msCancelRequestAnimationFrame
 );
 
-requestAnimationFrame.cancel = function(id) {
-
-    return cancelAnimationFrame.call(global, id);
-};
+if (cancelAnimationFrame) {
+    requestAnimationFrame.cancel = function(id) {
+        return cancelAnimationFrame.call(window, id);
+    };
+} else {
+    requestAnimationFrame.cancel = function(id) {
+        return global.clearTimeout(id);
+    };
+}
 
 
 module.exports = requestAnimationFrame;
