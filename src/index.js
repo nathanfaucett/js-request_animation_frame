@@ -4,12 +4,13 @@ var environment = require("environment"),
 
 var lastTime = 0,
     window = environment.window,
-    max = Math.max,
-
-    requestAnimationFrame, cancelAnimationFrame;
+    max = Math.max;
 
 
-requestAnimationFrame = (
+module.exports = requestAnimationFrame;
+
+
+window.requestAnimationFrame = (
     window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -30,7 +31,7 @@ requestAnimationFrame = (
     }
 );
 
-cancelAnimationFrame = (
+window.cancelAnimationFrame = (
     window.cancelAnimationFrame ||
     window.cancelRequestAnimationFrame ||
 
@@ -47,9 +48,14 @@ cancelAnimationFrame = (
     window.msCancelRequestAnimationFrame
 );
 
-if (cancelAnimationFrame) {
+function requestAnimationFrame(callback, element) {
+
+    return window.requestAnimationFrame(callback, element);
+}
+
+if (window.cancelAnimationFrame) {
     requestAnimationFrame.cancel = function(id) {
-        return cancelAnimationFrame.call(window, id);
+        return window.cancelAnimationFrame(id);
     };
 } else {
     requestAnimationFrame.cancel = function(id) {
