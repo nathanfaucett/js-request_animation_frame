@@ -67,7 +67,7 @@ if (nativeCancelAnimationFrame) {
 }
 
 
-requestAnimationFrame.cancel(requestAnimationFrame(function noop() {}));
+requestAnimationFrame(function noop() {});
 
 
 module.exports = requestAnimationFrame;
