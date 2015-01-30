@@ -1,4 +1,5 @@
 var environment = require("environment"),
+    emptyFunction = require("empty_function"),
     time = require("time");
 
 
@@ -67,7 +68,7 @@ if (nativeCancelAnimationFrame) {
 }
 
 
-requestAnimationFrame(function noop() {});
+requestAnimationFrame(emptyFunction);
 
 
 module.exports = requestAnimationFrame;
