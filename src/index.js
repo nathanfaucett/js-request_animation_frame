@@ -57,7 +57,7 @@ if (nativeRequestAnimationFrame) {
 }
 
 
-if (nativeCancelAnimationFrame) {
+if (nativeCancelAnimationFrame && nativeRequestAnimationFrame) {
     requestAnimationFrame.cancel = function(id) {
         return nativeCancelAnimationFrame.call(window, id);
     };
