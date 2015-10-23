@@ -1,49 +1,48 @@
 var environment = require("environment"),
     emptyFunction = require("empty_function"),
-    time = require("time");
+    now = require("now");
 
 
 var window = environment.window,
-
-    nativeRequestAnimationFrame = (
-        window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame
-    ),
-
-    nativeCancelAnimationFrame = (
-        window.cancelAnimationFrame ||
-        window.cancelRequestAnimationFrame ||
-
-        window.webkitCancelAnimationFrame ||
-        window.webkitCancelRequestAnimationFrame ||
-
-        window.mozCancelAnimationFrame ||
-        window.mozCancelRequestAnimationFrame ||
-
-        window.oCancelAnimationFrame ||
-        window.oCancelRequestAnimationFrame ||
-
-        window.msCancelAnimationFrame ||
-        window.msCancelRequestAnimationFrame
-    ),
-
-    requestAnimationFrame, lastTime, max;
+    requestAnimationFrame, lastTime;
 
 
-if (nativeRequestAnimationFrame) {
+window.requestAnimationFrame = (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame
+);
+
+window.cancelRequestAnimationFrame = (
+    window.cancelAnimationFrame ||
+    window.cancelRequestAnimationFrame ||
+
+    window.webkitCancelAnimationFrame ||
+    window.webkitCancelRequestAnimationFrame ||
+
+    window.mozCancelAnimationFrame ||
+    window.mozCancelRequestAnimationFrame ||
+
+    window.oCancelAnimationFrame ||
+    window.oCancelRequestAnimationFrame ||
+
+    window.msCancelAnimationFrame ||
+    window.msCancelRequestAnimationFrame
+);
+
+
+if (window.requestAnimationFrame) {
     requestAnimationFrame = function requestAnimationFrame(callback, element) {
-        return nativeRequestAnimationFrame.call(window, callback, element);
+        return window.requestAnimationFrame(callback, element);
     };
 } else {
-    max = Math.max;
     lastTime = 0;
 
     requestAnimationFrame = function requestAnimationFrame(callback) {
-        var current = time.now(),
-            timeToCall = max(0, 16 - (current - lastTime)),
+        var current = now(),
+            timeToCall = Math.max(0, 16 - (current - lastTime)),
             id = global.setTimeout(
                 function runCallback() {
                     callback(current + timeToCall);
@@ -57,9 +56,9 @@ if (nativeRequestAnimationFrame) {
 }
 
 
-if (nativeCancelAnimationFrame && nativeRequestAnimationFrame) {
+if (window.cancelRequestAnimationFrame && window.requestAnimationFrame) {
     requestAnimationFrame.cancel = function(id) {
-        return nativeCancelAnimationFrame.call(window, id);
+        return window.cancelRequestAnimationFrame(id);
     };
 } else {
     requestAnimationFrame.cancel = function(id) {
