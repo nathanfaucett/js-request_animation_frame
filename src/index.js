@@ -1,6 +1,6 @@
-var environment = require("environment"),
-    emptyFunction = require("empty_function"),
-    now = require("now");
+var environment = require("@nathanfaucett/environment"),
+    emptyFunction = require("@nathanfaucett/empty_function"),
+    now = require("@nathanfaucett/now");
 
 
 var window = environment.window,
