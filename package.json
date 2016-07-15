@@ -29,7 +29,7 @@
     "zuul": "^3.6.0"
   },
   "dependencies": {
-    "@nathanfaucett/now": "^0.0.1",
+    "@nathanfaucett/now": "^0.0.2",
     "@nathanfaucett/empty_function": "^0.0.1",
     "@nathanfaucett/environment": "^0.0.1"
   }
