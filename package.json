@@ -1,6 +1,6 @@
 {
   "name": "@nathanfaucett/request_animation_frame",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "requestAnimationFrame for the browser and node.js",
   "repository": {
     "type": "git",
