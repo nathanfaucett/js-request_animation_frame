@@ -1,6 +1,6 @@
 {
   "name": "@nathanfaucett/request_animation_frame",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "requestAnimationFrame for the browser and node.js",
   "repository": {
     "type": "git",
@@ -29,8 +29,8 @@
     "zuul": "^3.6.0"
   },
   "dependencies": {
-    "@nathanfaucett/now": "^0.0.2",
+    "@nathanfaucett/now": "^0.0.3",
     "@nathanfaucett/empty_function": "^0.0.1",
-    "@nathanfaucett/environment": "^0.0.1"
+    "@nathanfaucett/environment": "^0.0.2"
   }
 }
