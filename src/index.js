@@ -41,7 +41,7 @@ if (window.requestAnimationFrame) {
     lastTime = 0;
 
     requestAnimationFrame = function requestAnimationFrame(callback) {
-        var current = now(),
+        var current = now.stamp(),
             timeToCall = Math.max(0, 16 - (current - lastTime)),
             id = global.setTimeout(
                 function runCallback() {
